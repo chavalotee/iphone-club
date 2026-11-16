@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Comercial · HelloTec × iPhone Club</title>
+    <meta name="description" content="Propuesta de HelloTec para iPhone Club: Sitio web, cotizador inteligente y posicionamiento local.">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='Georgia' font-weight='bold' fill='%231d4ed8'>H</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg: #f0f5fc;
+            --bg-deep: #e6eef9;
+            --bg-paper: #ebf2fb;
+            --bg-white: #f8fbff;
+
+            --black: #050a14;
+            --black-soft: #0b1220;
+
+            --ink: #0c1425;
+            --ink-soft: #243048;
+            --muted: #5a6b85;
+            --muted-light: #94a3b8;
+
+            --royal: #1d4ed8;
+            --sky: #3b82f6;
+            --sky-light: #60a5fa;
+            --navy: #1e3a8a;
+
+            --border: #d4e0f2;
+            --border-strong: #b0c2dc;
+            --border-accent: rgba(29, 78, 216, 0.3);
+
+            --font-editorial: 'Newsreader', Georgia, serif;
+            --font-magazine: 'Fraunces', Georgia, serif;
+            --font-sans: 'Inter', system-ui, sans-serif;
+
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg-paper);
+            color: var(--ink);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        ::selection { background: var(--royal); color: var(--bg-paper); }
+
+        /* Textura de papel */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ========================================= */
+        /* CÍRCULOS DIFUMINADOS FIXED (toda la página) */
+        /* ========================================= */
+        .bg-circles-page {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            will-change: transform;
+        }
+        .bg-circle-1 {
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(29, 78, 216, 0.14), transparent 70%);
+            top: -250px; left: -150px;
+            animation: float-bg-1 24s ease-in-out infinite;
+        }
+        .bg-circle-2 {
+            width: 550px; height: 550px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.11), transparent 70%);
+            bottom: -200px; right: -150px;
+            animation: float-bg-2 28s ease-in-out infinite;
+        }
+        .bg-circle-3 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(29, 78, 216, 0.09), transparent 70%);
+            top: 40%; left: 50%;
+            animation: float-bg-3 22s ease-in-out infinite;
+        }
+        .bg-circle-4 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.10), transparent 70%);
+            top: 15%; right: 20%;
+            animation: float-bg-1 30s ease-in-out infinite reverse;
+        }
+        @keyframes float-bg-1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(80px, 60px) scale(1.1); }
+            66% { transform: translate(-40px, 100px) scale(0.95); }
+        }
+        @keyframes float-bg-2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-100px, -80px) scale(1.15); }
+        }
+        @keyframes float-bg-3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-80px, -100px) scale(1.2); }
+        }
+
+        /* Spotlight del cursor */
+        .spotlight {
+            position: fixed;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.05), transparent 60%);
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+        }
+        @media (hover: none) { .spotlight { display: none; } }
+
+        /* ========================================= */
+        /* CÍRCULOS DE CONTORNO (por sección) */
+        /* ========================================= */
+        .bg-circles {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 0 24px rgba(255, 255, 255, 0.02);
+            animation: float 25s infinite ease-in-out;
+        }
+        .c1 { width: 500px; height: 500px; top: -10%; left: -10%; animation-delay: 0s; }
+        .c2 { width: 300px; height: 300px; bottom: 10%; right: -5%; animation-delay: -5s; }
+        .c3 { width: 150px; height: 150px; top: 40%; left: 50%; animation-delay: -10s; border-color: rgba(59, 130, 246, 0.2); }
+        .c4 { width: 80px; height: 80px; top: 20%; right: 20%; animation-delay: -15s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-40px) scale(1.05); }
+        }
+
+        /* Variantes para secciones dark alternas */
+        .circles-alt .c1 { top: 15%; left: -15%; width: 420px; height: 420px; }
+        .circles-alt .c2 { bottom: -10%; right: 10%; width: 320px; height: 320px; }
+        .circles-alt .c3 { top: 60%; left: 70%; width: 180px; height: 180px; }
+        .circles-alt .c4 { top: 10%; right: 30%; width: 60px; height: 60px; }
+
+        /* HEADER dinámico */
+        header {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.5s var(--ease-out);
+            background: rgba(235, 242, 251, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(12, 20, 37, 0.06);
+        }
+        header.on-dark {
+            background: rgba(5, 10, 20, 0.85);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+        }
+        header.on-dark .logo { color: var(--bg-paper); }
+        header.on-dark .header-meta { color: var(--muted-light); }
+
+        .logo {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--ink);
+            letter-spacing: -0.04em;
+            text-decoration: none;
+            transition: color 0.5s;
+        }
+        .logo span { color: var(--royal); transition: color 0.5s; }
+        header.on-dark .logo span { color: var(--sky); }
+
+        .header-meta {
+            font-family: var(--font-magazine);
+            font-style: italic;
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color 0.5s;
+        }
+        @media (max-width: 768px) { .header-meta { display: none; } }
+
+        /* CONTENEDOR */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 6%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* SECCIONES */
+        section {
+            padding: 120px 0;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+        section:last-of-type { border-bottom: none; }
+
+        /* TIPOGRAFÍA */
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--royal);
+            margin-bottom: 24px;
+        }
+        .eyebrow::before {
+            content: '';
+            width: 32px; height: 1px;
+            background: var(--royal);
+        }
+
+        h1.hero-title {
+            font-family: var(--font-sans);
+            font-size: clamp(48px, 7vw, 88px);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+            margin-bottom: 32px;
+            color: var(--bg-paper);
+        }
+        h1.hero-title em {
+            font-family: var(--font-magazine);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--sky);
+            letter-spacing: -0.02em;
+        }
+
+        h2.section-title {
+            font-family: var(--font-magazine);
+            font-weight: 300;
+            font-size: clamp(38px, 5.5vw, 64px);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            color: var(--ink);
+        }
+        h2.section-title em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--royal);
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+            max-width: 720px;
+            font-weight: 400;
+        }
+        p strong { color: var(--ink); font-weight: 700; }
+
+        .lead {
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: clamp(19px, 2.2vw, 24px);
+            line-height: 1.5;
+            color: var(--ink-soft);
+            max-width: 720px;
+            letter-spacing: -0.01em;
+            margin-bottom: 40px;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            min-height: 100svh;
+            padding: 120px 0 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--black);
+            color: var(--bg-paper);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--royal);
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            color: var(--sky-light);
+            padding: 8px 16px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: clamp(18px, 2vw, 22px);
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 640px;
+            line-height: 1.6;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* DIAGNÓSTICO */
+        .diagnosis-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-top: 56px;
+        }
+        @media (min-width: 768px) {
+            .diagnosis-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .diag-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s var(--ease-out);
+            position: relative;
+        }
+        .diag-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-6px);
+            box-shadow: 0 24px 60px -20px rgba(29, 78, 216, 0.2);
+        }
+        .diag-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: rgba(29, 78, 216, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .diag-icon svg { color: var(--royal); width: 24px; height: 24px; }
+        .diag-card h3 {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        .diag-card p {
+            font-size: 15px;
+            line-height: 1.65;
+            margin: 0;
+            color: var(--muted);
+        }
+
+        /* FEATURES DARK */
+        .features-dark-section {
+            background: var(--black);
+            color: var(--bg-paper);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom: none;
+        }
+        .features-dark-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .features-dark-section .eyebrow { color: var(--sky); }
+        .features-dark-section .eyebrow::before { background: var(--sky); }
+
+        .features-dark-section h2 {
+            font-family: var(--font-magazine);
+            font-weight: 300;
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.05;
+            letter-spacing: -0.035em;
+            margin-bottom: 24px;
+            color: var(--bg-paper);
+            position: relative;
+            z-index: 2;
+        }
+        .features-dark-section h2 em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--sky);
+        }
+
+        /* TABLA GIGANTE dark */
+        .giant-table {
+            display: flex;
+            flex-direction: column;
+            border-top: 2px solid var(--sky);
+            position: relative;
+            z-index: 2;
+            margin-top: 64px; /* Ajuste para compensar el texto eliminado */
+        }
+        .giant-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            padding: 56px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: flex-start;
+            transition: all 0.4s var(--ease-out);
+        }
+        @media (min-width: 768px) {
+            .giant-row {
+                grid-template-columns: 320px 1fr;
+                gap: 64px;
+                padding: 72px 0;
+            }
+        }
+        .giant-row:hover {
+            background-color: rgba(59, 130, 246, 0.05);
+            padding-left: 24px;
+            padding-right: 24px;
+            border-radius: 16px;
+        }
+        .giant-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .giant-icon {
+            width: 64px; height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .giant-icon svg {
+            width: 48px; height: 48px;
+            color: var(--sky);
+            stroke-width: 1.5;
+        }
+        .giant-title {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: var(--bg-paper);
+        }
+        .giant-desc {
+            font-size: 18px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.72);
+            margin: 0;
+            max-width: 100%;
+        }
+        .giant-desc strong {
+            color: var(--bg-paper);
+            font-weight: 700;
+        }
+
+        /* COTIZADOR */
+        .cotizador-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+            margin-top: 40px;
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 20px 60px -30px rgba(12, 20, 37, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        @media (min-width: 900px) {
+            .cotizador-container { grid-template-columns: 1fr 1.2fr; }
+        }
+        .cotizador-container::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1), transparent 60%);
+            pointer-events: none;
+        }
+        .cotizador-text h4 {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .cotizador-text p {
+            font-size: 15px;
+            margin-bottom: 24px;
+            color: var(--muted);
+        }
+        .cotizador-text ul {
+            list-style: none;
+            padding: 0;
+        }
+        .cotizador-text ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .cotizador-text ul li svg {
+            color: var(--royal);
+            width: 18px; height: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .mockup-box {
+            background: var(--black);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 20px 50px -20px rgba(12, 20, 37, 0.4);
+        }
+        .mockup-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .mockup-header span {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .mockup-field { margin-bottom: 16px; }
+        .mockup-field label {
+            display: block;
+            font-size: 11px;
+            color: var(--muted-light);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+        .mockup-input {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--bg-paper);
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mockup-input svg { width: 16px; height: 16px; color: var(--muted-light); }
+
+        .mockup-result {
+            margin-top: 24px;
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .mockup-result span {
+            display: block;
+            font-size: 11px;
+            color: var(--sky-light);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .mockup-result strong {
+            font-family: var(--font-magazine);
+            font-size: 28px;
+            color: var(--bg-paper);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        /* PILARES */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-top: 48px;
+        }
+        @media (min-width: 768px) {
+            .pillars-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .pillar-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s var(--ease-out);
+        }
+        .pillar-card:hover {
+            border-color: var(--border-accent);
+            box-shadow: 0 20px 50px -20px rgba(29, 78, 216, 0.2);
+            transform: translateY(-4px);
+        }
+        .pillar-card h3 {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+        }
+        .pillar-card p {
+            font-size: 15px;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        /* PAGO */
+        .payment-section {
+            background: linear-gradient(135deg, #0b1a33 0%, #050a14 100%);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 32px;
+            padding: 72px 56px;
+            margin: 0 auto;
+            max-width: 900px;
+            text-align: center;
+            box-shadow: 0 40px 100px -40px rgba(29, 78, 216, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .payment-section::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: 50%;
+            transform: translateX(-50%);
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.18), transparent 65%);
+            pointer-events: none;
+            animation: price-glow 5s ease-in-out infinite;
+        }
+        @keyframes price-glow {
+            0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+        }
+        .payment-section .eyebrow {
+            color: var(--sky);
+            position: relative;
+            z-index: 2;
+        }
+        .payment-section .eyebrow::before { background: var(--sky); }
+
+        .payment-section h2 {
+            font-family: var(--font-magazine);
+            font-weight: 300;
+            font-size: clamp(36px, 4.5vw, 56px);
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            color: var(--bg-paper);
+            line-height: 1.05;
+            position: relative;
+            z-index: 2;
+        }
+        .payment-section h2 em { font-style: italic; color: var(--sky); }
+        .payment-section p {
+            font-size: 17px;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.72);
+            margin: 0 auto 20px;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+        .payment-section p strong { color: var(--bg-paper); font-weight: 600; }
+        .payment-highlight {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.18);
+            border: 1px solid rgba(59, 130, 246, 0.45);
+            color: var(--sky-light);
+            padding: 14px 28px;
+            border-radius: 99px;
+            font-size: 15px;
+            font-weight: 700;
+            margin-top: 24px;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 0.02em;
+        }
+
+        /* TIMELINE dark */
+        .timeline-section {
+            background: var(--black);
+            color: var(--bg-paper);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom: none;
+        }
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            bottom: -20%; left: -10%;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+        .timeline-section .eyebrow { color: var(--sky); }
+        .timeline-section .eyebrow::before { background: var(--sky); }
+        .timeline-section h2.section-title { color: var(--bg-paper); }
+        .timeline-section h2.section-title em { color: var(--sky); }
+        .timeline-section p { color: rgba(255, 255, 255, 0.72); }
+        .timeline-section p strong { color: var(--bg-paper); }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
+        .timeline-header .eyebrow { justify-content: center; }
+        .timeline-header p { margin: 0 auto; }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 20px;
+            top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--sky), rgba(59, 130, 246, 0.3) 70%, transparent);
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+        }
+        @media (min-width: 768px) {
+            .timeline-line { left: 50%; transform: translateX(-1px); }
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            padding-bottom: 56px;
+        }
+        @media (min-width: 768px) {
+            .timeline-item {
+                padding-left: 0;
+                display: grid;
+                grid-template-columns: 1fr auto 1fr;
+                gap: 40px;
+                align-items: start;
+                padding-bottom: 72px;
+            }
+            .timeline-item:nth-child(odd) .tl-content { order: 1; text-align: right; }
+            .timeline-item:nth-child(odd) .tl-empty { order: 3; }
+            .timeline-item:nth-child(even) .tl-content { order: 3; text-align: left; }
+            .timeline-item:nth-child(even) .tl-empty { order: 1; }
+            .timeline-item .tl-content { padding-top: 4px; }
+        }
+        .timeline-item:last-child { padding-bottom: 0; }
+
+        .tl-dot {
+            position: absolute;
+            left: 12px;
+            top: 4px;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: var(--sky);
+            border: 3px solid var(--black);
+            box-shadow: 0 0 0 1px var(--sky), 0 0 20px rgba(59, 130, 246, 0.5);
+            z-index: 2;
+        }
+        @media (min-width: 768px) {
+            .tl-dot {
+                position: relative;
+                left: auto;
+                top: 4px;
+                order: 2;
+                justify-self: center;
+            }
+        }
+        .tl-date {
+            font-family: var(--font-magazine);
+            font-style: italic;
+            font-size: 15px;
+            color: var(--sky);
+            margin-bottom: 6px;
+            letter-spacing: 0.02em;
+        }
+        .tl-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--bg-paper);
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            line-height: 1.25;
+        }
+        .tl-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.55;
+            max-width: 360px;
+        }
+        @media (min-width: 768px) {
+            .timeline-item:nth-child(odd) .tl-desc { margin-left: auto; }
+        }
+
+        /* CIERRE */
+        .cierre-final {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 0 40px;
+        }
+        .cierre-final h2 {
+            font-family: var(--font-magazine);
+            font-style: italic;
+            font-weight: 400;
+            font-size: clamp(40px, 6vw, 72px);
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            color: var(--ink);
+            line-height: 1.05;
+        }
+        .cierre-final h2 em { color: var(--royal); font-style: italic; }
+        .cierre-final p {
+            font-size: 19px;
+            color: var(--ink-soft);
+            max-width: 700px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+        }
+        .cierre-final p strong { color: var(--ink); font-weight: 600; }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--ink);
+            color: var(--bg-paper);
+            padding: 20px 40px;
+            border-radius: 999px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px -10px rgba(29, 78, 216, 0.4);
+        }
+        .btn-primary:hover {
+            background: var(--royal);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px -10px rgba(29, 78, 216, 0.6);
+        }
+
+        footer {
+            background: var(--black);
+            padding: 60px 5% 40px;
+            text-align: center;
+            border-top: 1px solid rgba(59, 130, 246, 0.15);
+        }
+        footer .footer-logo {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--bg-paper);
+            letter-spacing: -0.04em;
+            margin-bottom: 12px;
+        }
+        footer .footer-logo span { color: var(--sky); }
+        footer p {
+            font-family: var(--font-magazine);
+            font-style: italic;
+            font-size: 14px;
+            color: var(--muted-light);
+            margin: 0 auto;
+        }
+
+        /* ANIMACIONES */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Móvil */
+        @media (max-width: 600px) {
+            section { padding: 80px 0; }
+            .features-dark-section, .timeline-section { padding: 80px 0; }
+            .hero { padding: 100px 0 60px; }
+            .payment-section { padding: 56px 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Círculos difuminados fixed (toda la página) -->
+    <div class="bg-circles-page">
+        <div class="bg-circle bg-circle-1"></div>
+        <div class="bg-circle bg-circle-2"></div>
+        <div class="bg-circle bg-circle-3"></div>
+        <div class="bg-circle bg-circle-4"></div>
+    </div>
+
+    <!-- Spotlight del cursor -->
+    <div class="spotlight" id="spotlight"></div>
+
+    <header id="main-header">
+        <a href="#" class="logo">HelloTec<span>.</span></a>
+        <div class="header-meta">Propuesta Comercial · iPhone Club</div>
+    </header>
+
+    <!-- HERO (DARK, 100svh) -->
+    <section class="hero">
+        <div class="bg-circles">
+            <div class="circle c1"></div>
+            <div class="circle c2"></div>
+            <div class="circle c3"></div>
+            <div class="circle c4"></div>
+        </div>
+
+        <div class="container reveal">
+            <div class="hero-badge">
+                <i data-lucide="zap" style="width: 14px; height: 14px;"></i>
+                Propuesta Comercial
+            </div>
+            <h1 class="hero-title">
+                El salto digital<br>
+                de <em>iPhone Club.</em>
+            </h1>
+            <p class="hero-subtitle">
+                Propuesta comercial, hecha para ustedes. Para captar clientes nuevos que buscan en Google, y tener un sitio web propio.
+            </p>
+        </div>
+    </section>
+
+    <!-- DIAGNÓSTICO -->
+    <section>
+        <div class="container">
+            <div class="reveal">
+                <div class="eyebrow">El punto de partida</div>
+                <h2 class="section-title">Hoy no tienen presencia digital.<br><em>Y eso es una ventaja enorme.</em></h2>
+                <p>
+                    Empezar desde cero significa que podemos construir exactamente lo que el negocio necesita, sin arrastrar los errores de una web vieja. Sin embargo, en el mercado de la tecnología, <strong>quien no está en Google, no existe.</strong>
+                </p>
+            </div>
+
+            <div class="diagnosis-grid reveal">
+                <div class="diag-card">
+                    <div class="diag-icon"><i data-lucide="search-x"></i></div>
+                    <h3>Invisibles en Google</h3>
+                    <p>Cuando alguien busca "comprar iPhone en Asunción" o "reparar pantalla iPhone", aparecen otras tiendas. Ustedes no están en la conversación.</p>
+                </div>
+                <div class="diag-card">
+                    <div class="diag-icon"><i data-lucide="clock"></i></div>
+                    <h3>Pérdida de tiempo cotizando</h3>
+                    <p>Perdés horas respondiendo WhatsApps solo para decirle a la gente "cuánto vale tu iPhone usado" o "cuánto sale el modelo X".</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES DARK -->
+    <section class="features-dark-section reveal">
+        <div class="bg-circles circles-alt">
+            <div class="circle c1"></div>
+            <div class="circle c2"></div>
+            <div class="circle c3"></div>
+            <div class="circle c4"></div>
+        </div>
+
+        <div class="container">
+            <div class="eyebrow">El cambio</div>
+            <h2>Un sitio web a la altura.<br><em>Y un cotizador único en el mercado.</em></h2>
+
+            <div class="giant-table">
+                <div class="giant-row">
+                    <div class="giant-left">
+                        <div class="giant-icon"><i data-lucide="layout-template"></i></div>
+                        <div class="giant-title">Diseño idéntico a tu local</div>
+                    </div>
+                    <p class="giant-desc">
+                        Respetamos tu línea gráfica al 100%. Usamos <strong>las mismas tipografías y colores de tu tienda física</strong> para que el cliente online sienta exactamente la misma confianza y experiencia que al entrar al local.
+                    </p>
+                </div>
+
+                <div class="giant-row">
+                    <div class="giant-left">
+                        <div class="giant-icon"><i data-lucide="zap"></i></div>
+                        <div class="giant-title">Velocidad extrema</div>
+                    </div>
+                    <p class="giant-desc">
+                        Nada de páginas lentas. Optimizamos cada imagen y el código para que el sitio cargue en milisegundos. <strong>Un sitio rápido vende más</strong> y posiciona mejor en Google.
+                    </p>
+                </div>
+
+                <div class="giant-row">
+                    <div class="giant-left">
+                        <div class="giant-icon"><i data-lucide="smartphone"></i></div>
+                        <div class="giant-title">Perfecto en cualquier dispositivo</div>
+                    </div>
+                    <p class="giant-desc">
+                        Diseño 100% adaptativo (Responsive). Se verá impecable tanto en un celular (donde está <strong>el 90% de tus clientes</strong>), como en un iPad o computadora de escritorio.
+                    </p>
+                </div>
+
+                <div class="giant-row">
+                    <div class="giant-left">
+                        <div class="giant-icon"><i data-lucide="package"></i></div>
+                        <div class="giant-title">Gestión total de stock</div>
+                    </div>
+                    <p class="giant-desc">
+                        Controlá qué modelos están disponibles y cuáles agotados desde un panel simple, <strong>manteniendo tu catálogo siempre actualizado</strong> y sin errores.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COTIZADOR + SEO -->
+    <section>
+        <div class="container">
+            <div class="reveal">
+                <div class="eyebrow">El cotizador</div>
+                <h2 class="section-title">El cliente sabe cuánto vale<br><em>sin preguntarte.</em></h2>
+            </div>
+
+            <div class="cotizador-container reveal">
+                <div class="cotizador-text">
+                    <h4>El Cotizador Inteligente (Exclusivo)</h4>
+                    <p>Implementamos un cotizador interactivo en la web. El usuario entra, selecciona su modelo, capacidad, estado y batería, y el sistema le arroja al instante <strong>cuánto le pagan por su equipo usado.</strong></p>
+                    <ul>
+                        <li><i data-lucide="check-circle"></i> Ahorro brutal de tiempo en atención al cliente.</li>
+                        <li><i data-lucide="check-circle"></i> El cliente compara precios sin compromiso.</li>
+                        <li><i data-lucide="check-circle"></i> Filtra a los curiosos y atrae a los que realmente quieren vender.</li>
+                    </ul>
+                </div>
+
+                <div class="mockup-box">
+                    <div class="mockup-header">
+                        <span>Cotizador iPhone Club</span>
+                        <i data-lucide="smartphone" style="width: 16px; height: 16px; color: var(--sky);"></i>
+                    </div>
+                    <div class="mockup-field">
+                        <label>Modelo</label>
+                        <div class="mockup-input">iPhone 13 Pro <i data-lucide="chevron-down"></i></div>
+                    </div>
+                    <div class="mockup-field">
+                        <label>Almacenamiento</label>
+                        <div class="mockup-input">256 GB <i data-lucide="chevron-down"></i></div>
+                    </div>
+                    <div class="mockup-field">
+                        <label>Estado de Batería</label>
+                        <div class="mockup-input">85% <i data-lucide="chevron-down"></i></div>
+                    </div>
+                    <div class="mockup-result">
+                        <span>Recibís por tu equipo</span>
+                        <strong>₲ 3.800.000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal" style="margin-top: 80px;">
+                <div class="eyebrow">Posicionamiento</div>
+                <h2 class="section-title">Que te encuentren<br><em>primero que a nadie.</em></h2>
+            </div>
+
+            <div class="pillars-grid reveal">
+                <div class="pillar-card">
+                    <div class="diag-icon"><i data-lucide="map-pin"></i></div>
+                    <h3>Dominio en Google Maps</h3>
+                    <p>Optimización de la ficha local para que cuando alguien busque reparaciones o iPhones en tu zona, aparezcan primero que nadie. Con fotos, reseñas y enlace directo a la web.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="diag-icon"><i data-lucide="line-chart"></i></div>
+                    <h3>SEO para posicionar</h3>
+                    <p>Estructuramos la web para que Google la ame. Para que cuando busquen <strong>"iPhone 17 Pro Max precio Asunción"</strong>, la primera opción sea iPhone Club.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGO -->
+    <section>
+        <div class="container">
+            <div class="payment-section reveal">
+                <div class="eyebrow" style="justify-content: center;">Inversión y propiedad</div>
+                <h2>Un solo pago.<br><em>Tu sitio para siempre.</em></h2>
+                <p>
+                    Queremos que estén tranquilos. <strong>El precio final del proyecto se paga una sola vez</strong>. No hay suscripciones mensuales obligatorias ni letras chicas. Una vez que el sitio se lanza, es de ustedes y queda online para siempre.
+                </p>
+                <p>
+                    Si en el futuro deciden actualizar el stock, cambiar el diseño o sumar nuevas funcionalidades, eso se cotiza aparte como un servicio adicional. Pero <strong>si el sitio se cae por un error técnico de nuestro desarrollo, nosotros lo solucionamos sin costo</strong>. La tienda va a estar ahí, funcionando sin problemas.
+                </p>
+                <div class="payment-highlight">
+                    <i data-lucide="shield-check" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>
+                    Pagás una vez. Es tuyo para siempre.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE DARK -->
+    <section class="timeline-section reveal">
+        <div class="bg-circles circles-alt">
+            <div class="circle c1"></div>
+            <div class="circle c2"></div>
+            <div class="circle c3"></div>
+            <div class="circle c4"></div>
+        </div>
+
+        <div class="container">
+            <div class="timeline-header">
+                <div class="eyebrow">Cómo trabajamos</div>
+                <h2 class="section-title">De la primera charla<br><em>al lanzamiento.</em></h2>
+                <p>Un proceso transparente y sin vueltas. Así es el camino para transformar tu tienda.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item">
+                    <div class="tl-content">
+                        <div class="tl-date">Paso 01</div>
+                        <div class="tl-title">Reunión Presencial</div>
+                        <div class="tl-desc">Nos conocemos en persona, escuchamos tus ideas a fondo y definimos exactamente qué necesita iPhone Club.</div>
+                    </div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-empty"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="tl-content">
+                        <div class="tl-date">Paso 02</div>
+                        <div class="tl-title">Propuesta y Acuerdo</div>
+                        <div class="tl-desc">Presentamos la propuesta final adaptada a lo que hablamos. Llegamos a un acuerdo y firmamos.</div>
+                    </div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-empty"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="tl-content">
+                        <div class="tl-date">Paso 03</div>
+                        <div class="tl-title">Diseño y Desarrollo</div>
+                        <div class="tl-desc">Nuestro equipo se pone a trabajar. Construimos el catálogo, el cotizador y ajustamos cada detalle visual.</div>
+                    </div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-empty"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="tl-content">
+                        <div class="tl-date">Paso 04</div>
+                        <div class="tl-title">Lanzamiento</div>
+                        <div class="tl-desc">Revisamos todo juntos, capacitamos a tu equipo y el sitio sale a la luz. A vender sin parar.</div>
+                    </div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-empty"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CIERRE -->
+    <section>
+        <div class="container">
+            <div class="cierre-final">
+                <h2>¿Empezamos a<br><em>trabajar juntos?</em></h2>
+                <p>
+                    Si te interesa, definamos una <strong>reunión presencial</strong> donde conocernos, entender cuántos productos de stock total tienen, qué planes podemos ofrecerles en base a sus necesidades y llegar a un acuerdo formal <strong>cara a cara, sin escondernos</strong>.
+                </p>
+                <a href="https://wa.me/595983646451?text=Hola%20HelloTec.%20Vi%20la%20propuesta%20para%20iPhone%20Club%20y%20quiero%20agendar%20una%20reuni%C3%B3n." target="_blank" rel="noopener" class="btn-primary">
+                    <i data-lucide="calendar" style="width: 20px; height: 20px;"></i>
+                    Agendar reunión presencial
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">HelloTec<span>.</span></div>
+        <p>Propuesta para iPhone Club · 2026 · Jorge Alejandro, CEO</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Spotlight cursor
+        const spotlight = document.getElementById('spotlight');
+        if (window.matchMedia('(hover: hover)').matches) {
+            document.addEventListener('mousemove', (e) => {
+                spotlight.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
+            });
+        }
+
+        // Reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: "0px 0px -60px 0px" });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Header dinámico
+        const header = document.getElementById('main-header');
+        const darkSections = document.querySelectorAll('.hero, .features-dark-section, .timeline-section, footer');
+
+        const headerObserver = new IntersectionObserver((entries) => {
+            let anyDark = false;
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+                    anyDark = true;
+                }
+            });
+            if (anyDark) {
+                header.classList.add('on-dark');
+            } else {
+                const stillDark = Array.from(darkSections).some(s => {
+                    const rect = s.getBoundingClientRect();
+                    return rect.top < window.innerHeight * 0.3 && rect.bottom > window.innerHeight * 0.3;
+                });
+                if (!stillDark) header.classList.remove('on-dark');
+            }
+        }, { threshold: [0, 0.1, 0.3, 0.5, 0.7, 1] });
+
+        darkSections.forEach(s => headerObserver.observe(s));
+    </script>
+</body>
+</html>
